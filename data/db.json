@@ -1,0 +1,302 @@
+{
+  "users": [
+    {
+      "id": "usr_001",
+      "nationalId": "29837124",
+      "fullName": "Kamau Njoroge Wainaina",
+      "email": "kamau.njoroge@gmail.com",
+      "phone": "+254 722 839 104",
+      "subCounty": "Kiharu",
+      "ward": "Murang'a Township",
+      "passwordHash": "Citizen2026!",
+      "role": "citizen",
+      "createdAt": "2026-10-01T08:30:00Z"
+    },
+    {
+      "id": "usr_002",
+      "nationalId": "34190822",
+      "fullName": "Wambui Grace Muthoni",
+      "email": "wambui.grace@yahoo.com",
+      "phone": "+254 711 405 923",
+      "subCounty": "Kangema",
+      "ward": "Kangari",
+      "passwordHash": "Citizen2026!",
+      "role": "citizen",
+      "createdAt": "2026-10-05T11:20:00Z"
+    }
+  ],
+  "admins": [
+    {
+      "id": "adm_001",
+      "fullName": "Dr. Newton Mwangi",
+      "email": "requests.admin@muranga.go.ke",
+      "department": "Directorate of Public Service Delivery & Citizen Requests",
+      "passwordHash": "Muranga2026!",
+      "role": "admin",
+      "badgeNumber": "MCG-SRD-0084"
+    },
+    {
+      "id": "adm_002",
+      "fullName": "Eng. Peter Gitau",
+      "email": "roads@muranga.go.ke",
+      "department": "Infrastructure, Roads, Housing and Transport",
+      "passwordHash": "Muranga2026!",
+      "role": "admin",
+      "badgeNumber": "MCG-ENG-012"
+    }
+  ],
+  "requests": [
+    {
+      "id": "req_101",
+      "trackingNumber": "MCG-2026-4819",
+      "title": "Defective Streetlight Cluster along Hospital Road",
+      "category": "Street Lighting",
+      "subCounty": "Kiharu",
+      "ward": "Murang'a Township",
+      "landmark": "Near Murang'a Level 5 Hospital Main Gate",
+      "description": "Four consecutive streetlights have been flickering and completely shut down for the past 6 nights, posing security risks for healthcare staff and patients entering the hospital after dark.",
+      "priority": "High",
+      "status": "In Progress",
+      "citizenId": "usr_001",
+      "citizenName": "Kamau Njoroge Wainaina",
+      "citizenPhone": "+254 722 839 104",
+      "citizenEmail": "kamau.njoroge@gmail.com",
+      "nationalId": "29837124",
+      "assignedDepartment": "Infrastructure, Roads, Housing and Transport",
+      "assignedOfficer": "Eng. Peter Gitau",
+      "resolutionNotes": "Field electrical team dispatched on Oct 16 to inspect the underground cable junction. Transformer breaker tripped due to stormwater ingress.",
+      "timeline": [
+        {
+          "id": "tl_1",
+          "status": "Pending",
+          "title": "Service Request Submitted",
+          "description": "Request successfully logged via Murang'a eCitizen portal.",
+          "actor": "Kamau Njoroge Wainaina",
+          "role": "Citizen",
+          "timestamp": "2026-10-12T19:40:00Z"
+        },
+        {
+          "id": "tl_2",
+          "status": "In Progress",
+          "title": "Assigned to Energy Maintenance Unit",
+          "description": "Forwarded by County Service Desk to Eng. Peter Gitau. Work order #WO-884 issued.",
+          "actor": "Dr. Newton Mwangi",
+          "role": "Service Desk Admin",
+          "timestamp": "2026-10-13T09:15:00Z"
+        }
+      ],
+      "createdAt": "2026-10-12T19:40:00Z",
+      "updatedAt": "2026-10-13T09:15:00Z"
+    },
+    {
+      "id": "req_102",
+      "trackingNumber": "MCG-2026-4820",
+      "title": "Severe Water Pipe Burst at Kangari Tea Center",
+      "category": "Water & Sanitation",
+      "subCounty": "Kangema",
+      "ward": "Kangari",
+      "landmark": "Opposite Kangari Market, near KTDA Factory",
+      "description": "Main 4-inch supply line ruptured under the feeder road. Clean potable water is gushing into tea collection bays, leaving over 120 households without tap water.",
+      "priority": "Urgent",
+      "status": "Resolved",
+      "citizenId": "usr_002",
+      "citizenName": "Wambui Grace Muthoni",
+      "citizenPhone": "+254 711 405 923",
+      "citizenEmail": "wambui.grace@yahoo.com",
+      "nationalId": "34190822",
+      "assignedDepartment": "Water, Irrigation, Environment and Natural Resources",
+      "assignedOfficer": "Officer Beatrice Karanja (MUWASCO)",
+      "resolutionNotes": "MUWASCO technical unit replaced the 4-meter fractured PVC section with ductile iron pipeline. Water pressure fully restored.",
+      "resolvedAt": "2026-10-15T16:00:00Z",
+      "feedbackRating": 5,
+      "feedbackComment": "Thank you Murang'a County Government and Governor Kang'ata for rapid response. Water restored within 24 hours!",
+      "timeline": [
+        {
+          "id": "tl_10",
+          "status": "Pending",
+          "title": "Request Logged",
+          "description": "Urgent water burst reported by resident.",
+          "actor": "Wambui Grace Muthoni",
+          "role": "Citizen",
+          "timestamp": "2026-10-14T07:15:00Z"
+        },
+        {
+          "id": "tl_11",
+          "status": "In Progress",
+          "title": "MUWASCO Rapid Response Team Dispatched",
+          "description": "Excavation team on site with pipe fittings.",
+          "actor": "Officer Beatrice Karanja",
+          "role": "County Officer",
+          "timestamp": "2026-10-14T10:30:00Z"
+        },
+        {
+          "id": "tl_12",
+          "status": "Resolved",
+          "title": "Repairs Completed and Flow Restored",
+          "description": "New coupling fitted and leak tested. Pressure normalized.",
+          "actor": "Officer Beatrice Karanja",
+          "role": "County Officer",
+          "timestamp": "2026-10-15T16:00:00Z"
+        }
+      ],
+      "createdAt": "2026-10-14T07:15:00Z",
+      "updatedAt": "2026-10-15T16:00:00Z"
+    },
+    {
+      "id": "req_103",
+      "trackingNumber": "MCG-2026-4821",
+      "title": "Culvert Blockage & Pothole Washout on Maragua-Gakoigo Road",
+      "category": "Roads & Infrastructure",
+      "subCounty": "Maragua",
+      "ward": "Ichagaki",
+      "landmark": "Near Gakoigo Showground junction",
+      "description": "Recent rains have blocked the main stormwater culvert, causing heavy water runoff to carve out a 2-foot deep pothole directly in the driving lane.",
+      "priority": "High",
+      "status": "Pending",
+      "citizenId": "usr_001",
+      "citizenName": "Kamau Njoroge Wainaina",
+      "citizenPhone": "+254 722 839 104",
+      "citizenEmail": "kamau.njoroge@gmail.com",
+      "nationalId": "29837124",
+      "timeline": [
+        {
+          "id": "tl_20",
+          "status": "Pending",
+          "title": "Request Received",
+          "description": "Awaiting initial triage by County Roads & Infrastructure Directorate.",
+          "actor": "System",
+          "role": "System",
+          "timestamp": "2026-10-17T14:10:00Z"
+        }
+      ],
+      "createdAt": "2026-10-17T14:10:00Z",
+      "updatedAt": "2026-10-17T14:10:00Z"
+    },
+    {
+      "id": "req_104",
+      "trackingNumber": "MCG-2026-4822",
+      "title": "Illegal Plastic Waste Dumping on Chania Riverbank",
+      "category": "Garbage & Environment",
+      "subCounty": "Gatanga",
+      "ward": "Kariara",
+      "landmark": "Near Chania Bridge boundary",
+      "description": "Unidentified commercial trucks are dumping construction debris and plastic waste directly onto the Chania river tributary at night.",
+      "priority": "Urgent",
+      "status": "In Progress",
+      "citizenId": "usr_002",
+      "citizenName": "Wambui Grace Muthoni",
+      "citizenPhone": "+254 711 405 923",
+      "citizenEmail": "wambui.grace@yahoo.com",
+      "nationalId": "34190822",
+      "assignedDepartment": "Water, Irrigation, Environment and Natural Resources",
+      "assignedOfficer": "Environment Inspector John Gikaria",
+      "resolutionNotes": "County enforcement officers cordoned off the access path and impounded one non-compliant truck.",
+      "timeline": [
+        {
+          "id": "tl_30",
+          "status": "Pending",
+          "title": "Citizen Report Filed",
+          "description": "Environmental degradation alert submitted.",
+          "actor": "Wambui Grace Muthoni",
+          "role": "Citizen",
+          "timestamp": "2026-10-15T18:22:00Z"
+        },
+        {
+          "id": "tl_31",
+          "status": "In Progress",
+          "title": "Enforcement Enforcement Intervened",
+          "description": "County Compliance unit deployed to investigate and block illegal entry.",
+          "actor": "Inspector John Gikaria",
+          "role": "County Officer",
+          "timestamp": "2026-10-16T08:45:00Z"
+        }
+      ],
+      "createdAt": "2026-10-15T18:22:00Z",
+      "updatedAt": "2026-10-16T08:45:00Z"
+    },
+    {
+      "id": "req_105",
+      "trackingNumber": "MCG-2026-4823",
+      "title": "Kang'ataCare Medication Stock Verification at Kiru Health Center",
+      "category": "Public Health",
+      "subCounty": "Mathioya",
+      "ward": "Kiru",
+      "landmark": "Kiru Sub-County Health Centre Dispensary",
+      "description": "Essential hypertension and diabetes drugs under the subsidized Kang'ataCare program were temporarily depleted. Requesting delivery of fresh consignment.",
+      "priority": "Standard",
+      "status": "Resolved",
+      "citizenId": "usr_001",
+      "citizenName": "Kamau Njoroge Wainaina",
+      "citizenPhone": "+254 722 839 104",
+      "citizenEmail": "kamau.njoroge@gmail.com",
+      "nationalId": "29837124",
+      "assignedDepartment": "Health and Sanitation",
+      "assignedOfficer": "Dr. Anne Wanjiku (County Pharmacist)",
+      "resolutionNotes": "Central medical stores dispatched emergency stock batch #KMC-449 to Kiru Dispensary on Oct 17. Medication now available for all registered beneficiaries.",
+      "resolvedAt": "2026-10-17T11:00:00Z",
+      "feedbackRating": 5,
+      "feedbackComment": "Confirmed receipt at the dispensary. Very efficient service.",
+      "timeline": [
+        {
+          "id": "tl_40",
+          "status": "Pending",
+          "title": "Request Logged",
+          "description": "Medication stock alert received from local patient committee.",
+          "actor": "Kamau Njoroge Wainaina",
+          "role": "Citizen",
+          "timestamp": "2026-10-16T09:00:00Z"
+        },
+        {
+          "id": "tl_41",
+          "status": "In Progress",
+          "title": "Stock Requisition Approved",
+          "description": "County Pharmacist authorized emergency batch distribution.",
+          "actor": "Dr. Anne Wanjiku",
+          "role": "County Officer",
+          "timestamp": "2026-10-16T14:30:00Z"
+        },
+        {
+          "id": "tl_42",
+          "status": "Resolved",
+          "title": "Pharmaceuticals Delivered & Restocked",
+          "description": "Dispensary staff logged full stock receipt.",
+          "actor": "Dr. Anne Wanjiku",
+          "role": "County Officer",
+          "timestamp": "2026-10-17T11:00:00Z"
+        }
+      ],
+      "createdAt": "2026-10-16T09:00:00Z",
+      "updatedAt": "2026-10-17T11:00:00Z"
+    },
+    {
+      "id": "req_106",
+      "trackingNumber": "MCG-2026-4824",
+      "title": "Fertilizer Subsidies Distribution Registration Query",
+      "category": "Agriculture & Livestock",
+      "subCounty": "Kigumo",
+      "ward": "Kigumo",
+      "landmark": "Kigumo Farmers Co-operative Society Hall",
+      "description": "Smallholder avocado and maize farmers in Kinyona & Muthithi are requesting extended hours for registration in the County Inua Mkulima Subsidized Fertilizer register.",
+      "priority": "Standard",
+      "status": "Pending",
+      "citizenId": "usr_002",
+      "citizenName": "Wambui Grace Muthoni",
+      "citizenPhone": "+254 711 405 923",
+      "citizenEmail": "wambui.grace@yahoo.com",
+      "nationalId": "34190822",
+      "timeline": [
+        {
+          "id": "tl_50",
+          "status": "Pending",
+          "title": "Inquiry Submitted",
+          "description": "Forwarded to Department of Agriculture Sub-County Coordinator.",
+          "actor": "System",
+          "role": "System",
+          "timestamp": "2026-10-18T03:15:00Z"
+        }
+      ],
+      "createdAt": "2026-10-18T03:15:00Z",
+      "updatedAt": "2026-10-18T03:15:00Z"
+    }
+  ]
+}

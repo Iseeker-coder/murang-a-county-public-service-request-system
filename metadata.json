@@ -1,0 +1,8 @@
+{
+  "name": "Murang'a County Public Service Request System",
+  "description": "Mini eCitizen-style citizen public service request, tracking, and service desk operations platform for Murang'a County Government, Kenya.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
