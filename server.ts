@@ -815,7 +815,7 @@ export async function createApp(serveFrontend = false) {
       app.get('*', (_req, res) => {
         res.sendFile(path.join(distPath, 'index.html'));
       });
-    });
+    }
   }
 
   return app;
