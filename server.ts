@@ -365,9 +365,8 @@ function writeDb(data: DBStructure): void {
   }
 }
 
-async function startServer() {
+export async function createApp(serveFrontend = false) {
   const app = express();
-  const PORT = Number(process.env.PORT) || 3000;
 
   // JSON Body parser with base64 image allowance
   app.use(express.json({ limit: '15mb' }));
@@ -796,27 +795,38 @@ async function startServer() {
     });
   });
 
-  // Vite Integration
-  if (process.env.NODE_ENV !== 'production') {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(__dirname, 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (_req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+  if (serveFrontend) {
+    // Vite Integration
+    if (process.env.NODE_ENV !== 'production') {
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: 'spa',
+      });
+      app.use(vite.middlewares);
+    } else {
+      const distPath = path.join(__dirname, 'dist');
+      app.use(express.static(distPath));
+      app.get('*', (_req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
+      });
     });
   }
+
+  return app;
+}
+
+async function startServer() {
+  const PORT = Number(process.env.PORT) || 3000;
+  const app = await createApp(true);
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Murang'a County Government Service Portal live on port ${PORT}`);
   });
 }
 
-startServer().catch((err) => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
-});
+if (process.env.VERCEL !== '1') {
+  startServer().catch((err) => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });
+}
