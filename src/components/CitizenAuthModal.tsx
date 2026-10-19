@@ -17,6 +17,7 @@ import {
 import { CitizenUser } from '../types';
 import { MURANGA_SUB_COUNTIES } from '../data/murangaData';
 import { MurangaOfficialCrest } from './MurangaOfficialCrest';
+import { useEscapeToClose } from '../hooks/useEscapeToClose';
 
 interface CitizenAuthModalProps {
   isOpen: boolean;
@@ -51,6 +52,8 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
   const [regSubCounty, setRegSubCounty] = useState('Kiharu');
   const [regWard, setRegWard] = useState('Murang\'a Township');
   const [regPassword, setRegPassword] = useState('Citizen2026!');
+
+  useEscapeToClose(isOpen, onClose);
 
   if (!isOpen) return null;
 
@@ -135,8 +138,12 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="citizen-auth-heading"
+      onClick={onClose}
     >
-      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div
+        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button Top Right */}
         <button
           type="button"

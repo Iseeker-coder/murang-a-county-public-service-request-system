@@ -25,6 +25,7 @@ import { AdminUser, ServiceRequest, RequestStatus, RequestCategory } from '../ty
 import { MURANGA_SUB_COUNTIES, CATEGORIES, COUNTY_DEPARTMENTS } from '../data/murangaData';
 import { MurangaEmblem } from './MurangaEmblem';
 import { MurangaOfficialCrest } from './MurangaOfficialCrest';
+import { useEscapeToClose } from '../hooks/useEscapeToClose';
 
 interface AdminPortalViewProps {
   currentAdmin: AdminUser | null;
@@ -86,6 +87,8 @@ export const AdminPortalView: React.FC<AdminPortalViewProps> = ({
       fetchRequests();
     }
   }, [currentAdmin, statusFilter, categoryFilter, subCountyFilter]);
+
+  useEscapeToClose(!!selectedRequest, () => setSelectedRequest(null));
 
   const handleAdminSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -574,8 +577,14 @@ export const AdminPortalView: React.FC<AdminPortalViewProps> = ({
 
       {/* Inspector & Action Modal */}
       {selectedRequest && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setSelectedRequest(null)}
+        >
+          <div
+            className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Header */}
             <div className="bg-emerald-800 text-white px-6 py-4 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">

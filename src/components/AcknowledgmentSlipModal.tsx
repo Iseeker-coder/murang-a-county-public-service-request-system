@@ -2,6 +2,7 @@ import React from 'react';
 import { Printer, X, CheckCircle2, Shield, Calendar, MapPin, User, FileText } from 'lucide-react';
 import { ServiceRequest } from '../types';
 import { MurangaEmblem } from './MurangaEmblem';
+import { useEscapeToClose } from '../hooks/useEscapeToClose';
 
 interface AcknowledgmentSlipModalProps {
   request: ServiceRequest | null;
@@ -14,6 +15,8 @@ export const AcknowledgmentSlipModal: React.FC<AcknowledgmentSlipModalProps> = (
   isOpen,
   onClose,
 }) => {
+  useEscapeToClose(isOpen, onClose);
+
   if (!isOpen || !request) return null;
 
   const handlePrint = () => {
@@ -21,8 +24,14 @@ export const AcknowledgmentSlipModal: React.FC<AcknowledgmentSlipModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden text-slate-900">
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden text-slate-900"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Action Header - Hidden on Print */}
         <div className="no-print flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
           <div className="flex items-center gap-2">

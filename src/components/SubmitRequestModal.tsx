@@ -21,6 +21,7 @@ import { CitizenUser, RequestCategory, RequestPriority, ServiceRequest } from '.
 import { MURANGA_SUB_COUNTIES, CATEGORIES } from '../data/murangaData';
 import { MurangaEmblem } from './MurangaEmblem';
 import { MurangaOfficialCrest } from './MurangaOfficialCrest';
+import { useEscapeToClose } from '../hooks/useEscapeToClose';
 
 interface SubmitRequestModalProps {
   isOpen: boolean;
@@ -68,6 +69,18 @@ export const SubmitRequestModal: React.FC<SubmitRequestModalProps> = ({
       setWard(currentUser.ward || wards[0] || 'Murang\'a Township');
     }
   }, [currentUser]);
+
+  const handleResetAndClose = () => {
+    setCreatedRequest(null);
+    setTitle('');
+    setDescription('');
+    setLandmark('');
+    setImagePreview(null);
+    setError(null);
+    onClose();
+  };
+
+  useEscapeToClose(isOpen, handleResetAndClose);
 
   if (!isOpen) return null;
 
@@ -140,19 +153,15 @@ export const SubmitRequestModal: React.FC<SubmitRequestModalProps> = ({
     }
   };
 
-  const handleResetAndClose = () => {
-    setCreatedRequest(null);
-    setTitle('');
-    setDescription('');
-    setLandmark('');
-    setImagePreview(null);
-    setError(null);
-    onClose();
-  };
-
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col">
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+      onClick={handleResetAndClose}
+    >
+      <div
+        className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[92vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Modal Header */}
         <div className="bg-emerald-800 text-white px-6 py-4 flex items-center justify-between border-b border-emerald-900 shrink-0">
           <div className="flex items-center gap-3">
