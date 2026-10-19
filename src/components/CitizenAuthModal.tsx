@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   ShieldCheck,
   Building2,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 import { CitizenUser } from '../types';
 import { MURANGA_SUB_COUNTIES } from '../data/murangaData';
@@ -34,6 +36,8 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [showRegPassword, setShowRegPassword] = useState(false);
 
   // Login form state
   const [loginIdentifier, setLoginIdentifier] = useState('29837124');
@@ -126,14 +130,21 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="citizen-auth-heading"
+    >
       <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
         {/* Close Button Top Right */}
         <button
+          type="button"
           onClick={onClose}
+          aria-label="Close dialog"
           className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors z-10"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5" aria-hidden="true" />
         </button>
 
         {/* Official Murang'a County Crest Header (Using uploaded logo3.webp single crest) */}
@@ -167,7 +178,7 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
           )}
 
           <div className="text-center mb-5">
-            <h3 className="text-lg font-bold text-slate-900 font-display">
+            <h3 id="citizen-auth-heading" className="text-lg font-bold text-slate-900 font-display">
               {mode === 'login' ? 'Sign In with National ID' : 'Register Citizen Account'}
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -178,23 +189,30 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2.5 text-xs text-red-700">
-              <AlertCircle className="w-4 h-4 shrink-0 text-red-600 mt-0.5" />
+            <div
+              role="alert"
+              aria-live="assertive"
+              className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2.5 text-xs text-red-700"
+            >
+              <AlertCircle className="w-4 h-4 shrink-0 text-red-600 mt-0.5" aria-hidden="true" />
               <span>{error}</span>
             </div>
           )}
 
           {mode === 'login' ? (
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-4" noValidate>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                <label htmlFor="login-identifier" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Kenyan National ID Number or Email *
                 </label>
                 <div className="relative">
-                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" aria-hidden="true" />
                   <input
+                    id="login-identifier"
+                    name="identifier"
                     type="text"
                     required
+                    autoComplete="username"
                     placeholder="e.g. 29837124 or citizen@gmail.com"
                     value={loginIdentifier}
                     onChange={(e) => setLoginIdentifier(e.target.value)}
@@ -205,24 +223,41 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
 
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="text-xs font-semibold text-slate-700">Password *</label>
-                  <span
+                  <label htmlFor="login-password" className="text-xs font-semibold text-slate-700">Password *</label>
+                  <button
+                    type="button"
                     onClick={() => alert('Password reset SMS link will be sent to your registered Safaricom/Airtel phone number.')}
-                    className="text-xs text-emerald-700 hover:underline cursor-pointer"
+                    className="text-xs text-emerald-700 hover:underline cursor-pointer bg-transparent p-0"
                   >
                     Forgot password?
-                  </span>
+                  </button>
                 </div>
                 <div className="relative">
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" aria-hidden="true" />
                   <input
-                    type="password"
+                    id="login-password"
+                    name="password"
+                    type={showLoginPassword ? 'text' : 'password'}
                     required
+                    autoComplete="current-password"
                     placeholder="Enter your password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all text-slate-900"
+                    className="w-full pl-9 pr-10 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all text-slate-900"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowLoginPassword((v) => !v)}
+                    aria-label={showLoginPassword ? 'Hide password' : 'Show password'}
+                    aria-pressed={showLoginPassword}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"
+                  >
+                    {showLoginPassword ? (
+                      <EyeOff className="w-4 h-4" aria-hidden="true" />
+                    ) : (
+                      <Eye className="w-4 h-4" aria-hidden="true" />
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -259,15 +294,19 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
               </div>
             </form>
           ) : (
-            <form onSubmit={handleRegister} className="space-y-3">
+            <form onSubmit={handleRegister} className="space-y-3" noValidate aria-label="Citizen registration form">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="reg-national-id" className="block text-xs font-semibold text-slate-700 mb-1">
                     National ID No. *
                   </label>
                   <input
+                    id="reg-national-id"
+                    name="nationalId"
                     type="text"
                     required
+                    inputMode="numeric"
+                    autoComplete="off"
                     placeholder="e.g. 34190822"
                     value={regNationalId}
                     onChange={(e) => setRegNationalId(e.target.value)}
@@ -275,12 +314,15 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="reg-phone" className="block text-xs font-semibold text-slate-700 mb-1">
                     Safaricom/Airtel Tel *
                   </label>
                   <input
+                    id="reg-phone"
+                    name="phone"
                     type="tel"
                     required
+                    autoComplete="tel"
                     placeholder="+254 7..."
                     value={regPhone}
                     onChange={(e) => setRegPhone(e.target.value)}
@@ -290,12 +332,15 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label htmlFor="reg-full-name" className="block text-xs font-semibold text-slate-700 mb-1">
                   Full Name (As on Kenyan ID) *
                 </label>
                 <input
+                  id="reg-full-name"
+                  name="fullName"
                   type="text"
                   required
+                  autoComplete="name"
                   placeholder="e.g. Mary Wanjiru Kariuki"
                   value={regFullName}
                   onChange={(e) => setRegFullName(e.target.value)}
@@ -304,11 +349,14 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label htmlFor="reg-email" className="block text-xs font-semibold text-slate-700 mb-1">
                   Email Address (Optional)
                 </label>
                 <input
+                  id="reg-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
                   placeholder="name@example.com"
                   value={regEmail}
                   onChange={(e) => setRegEmail(e.target.value)}
@@ -318,10 +366,12 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="reg-sub-county" className="block text-xs font-semibold text-slate-700 mb-1">
                     Sub-County *
                   </label>
                   <select
+                    id="reg-sub-county"
+                    name="subCounty"
                     value={regSubCounty}
                     onChange={(e) => handleSubCountyChange(e.target.value)}
                     className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white"
@@ -335,10 +385,12 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label htmlFor="reg-ward" className="block text-xs font-semibold text-slate-700 mb-1">
                     Ward *
                   </label>
                   <select
+                    id="reg-ward"
+                    name="ward"
                     value={regWard}
                     onChange={(e) => setRegWard(e.target.value)}
                     className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white"
@@ -353,17 +405,40 @@ export const CitizenAuthModal: React.FC<CitizenAuthModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label htmlFor="reg-password" className="block text-xs font-semibold text-slate-700 mb-1">
                   Create Password *
                 </label>
-                <input
-                  type="password"
-                  required
-                  placeholder="At least 6 characters"
-                  value={regPassword}
-                  onChange={(e) => setRegPassword(e.target.value)}
-                  className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white"
-                />
+                <div className="relative">
+                  <input
+                    id="reg-password"
+                    name="newPassword"
+                    type={showRegPassword ? 'text' : 'password'}
+                    required
+                    minLength={6}
+                    autoComplete="new-password"
+                    aria-describedby="reg-password-hint"
+                    placeholder="At least 6 characters"
+                    value={regPassword}
+                    onChange={(e) => setRegPassword(e.target.value)}
+                    className="w-full px-3 py-2 pr-9 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowRegPassword((v) => !v)}
+                    aria-label={showRegPassword ? 'Hide password' : 'Show password'}
+                    aria-pressed={showRegPassword}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"
+                  >
+                    {showRegPassword ? (
+                      <EyeOff className="w-4 h-4" aria-hidden="true" />
+                    ) : (
+                      <Eye className="w-4 h-4" aria-hidden="true" />
+                    )}
+                  </button>
+                </div>
+                <p id="reg-password-hint" className="mt-1 text-[11px] text-slate-500">
+                  Must be at least 6 characters.
+                </p>
               </div>
 
               <button
