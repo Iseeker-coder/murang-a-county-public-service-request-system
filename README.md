@@ -4,13 +4,11 @@
 [![National Architecture](https://img.shields.io/badge/Platform-eCitizen%20Kenya%20Standard-111827.svg)](#)
 [![Stack](https://img.shields.io/badge/Backend-PHP%208.1%2B%20%7C%20Node%20Express-blue.svg)](#)
 
-A civic web application tailored for **Murang'a County Government (County Code: 021), Kenya**, modeled after the national **eCitizen Kenya** portal (`accounts.ecitizen.go.ke`) and the official **Murang'a County Government** portal (`muranga.go.ke`).
-
 ---
 
 ## 1. Project Overview & Features
 
-### Citizen Portal (eCitizen Mini-System)
+### Citizen Portal (eCitizen-style Mini-System)
 - **Citizen Registration & Login:** Full eCitizen-style flow using Kenyan National ID number, Full Name, Mobile Phone (`+254 7...`), Sub-County, and Ward selection.
 - **Service Request Submission:** Submit public issue reports across 8 county categories (Street Lighting, Water & Sanitation, Roads & Culverts, Garbage & Dumpsites, Health Dispensaries, Agriculture Subsidies, Education Bursaries).
 - **Murang'a Administrative Geography:** Full mapping of Murang'a's **7 Sub-Counties** (*Kiharu, Kangema, Mathioya, Gatanga, Kandara, Maragua, Kigumo*) and their respective 35 electoral wards.
@@ -76,15 +74,3 @@ npm run dev
 npm run build
 npm run start
 ```
-
----
-
-## 4. Evaluation Criteria Verification Checklist
-
-| Criteria | Implementation Highlights |
-| :--- | :--- |
-| **Code Quality (25%)** | Modular TypeScript architecture, clear interfaces (`/src/types/index.ts`), strict linting, zero dead buttons, anti-slop typography. |
-| **Functionality (35%)** | Real `/api/*` endpoints, persistent JSON file DB, eCitizen registration/login, request creation, tracking, status updates, timeline logs. |
-| **UI/UX Design (20%)** | Authentic Murang'a County branding (coat of arms, green `#007A3D`, hotlines), eCitizen styling, responsive 1440px desktop baseline. |
-| **Documentation (10%)** | Detailed `README.md`, `/backend-php/README.md`, in-app interactive **PHP Code Hub**, cURL testing examples. |
-| **Bonus Features (10%)** | Printable County Acknowledgment Docket with barcode, Citizen Satisfaction Star Rating, SMS notification dispatch, CSV report export. |
